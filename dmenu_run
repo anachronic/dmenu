@@ -6,11 +6,12 @@
 # how apps execute at the same time I get to keep the defaults for each
 # application. This also does not mess with .desktop applications
 override_execution() {
-    read cmd
+    read -r cmd
     case $cmd in
-        "spotify") spotify --force-device-scale-factor=1.5 ;;
-        "datagrip") echo $cmd | xargs env _JAVA_AWT_WM_NONREPARENTING=1 ;;
-        *) $cmd ;;
+        "spotify") echo "$cmd --force-device-scale-factor=1.5" ;;
+        "datagrip") echo "env _JAVA_AWT_WM_NONREPARENTING=1 $cmd" ;;
+        "discord"|"discord-canary") echo "$cmd --no-sandbox" ;;
+        *) echo "$cmd" ;;
     esac
 }
 
