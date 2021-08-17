@@ -1,2 +1,17 @@
 #!/bin/sh
-dmenu_path | dmenu "$@" | ${SHELL:-"/bin/sh"} &
+
+# This should fix applications that have problems with default execution, like
+# apps that don't respect xrandr, apps that are Java, apps with lodpi, etc,
+# running them through override_execution allows me to have fine control over
+# how apps execute at the same time I get to keep the defaults for each
+# application. This also does not mess with .desktop applications
+override_execution() {
+    read cmd
+    case $cmd in
+        "spotify") spotify --force-device-scale-factor=1.5 ;;
+        "datagrip") echo $cmd | xargs env _JAVA_AWT_WM_NONREPARENTING=1 ;;
+        *) $1 & ;;
+    esac
+}
+
+dmenu_path | dmenu "$@" | override_execution | ${SHELL:-"/bin/sh"}  &
