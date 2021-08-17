@@ -10,8 +10,8 @@ override_execution() {
     case $cmd in
         "spotify") spotify --force-device-scale-factor=1.5 ;;
         "datagrip") echo $cmd | xargs env _JAVA_AWT_WM_NONREPARENTING=1 ;;
-        *) $1 & ;;
+        *) $cmd ;;
     esac
 }
 
-dmenu_path | dmenu "$@" | override_execution | ${SHELL:-"/bin/sh"}  &
+dmenu_path | dmenu "$@" | override_execution | ${SHELL:-"/bin/sh"} &
