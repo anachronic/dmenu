@@ -6,7 +6,8 @@ static int centered = 0;                    /* -c option; centers dmenu on scree
 static int min_width = 1200;                    /* minimum width when centered */
 /* -fn option overrides fonts[0]; default X11 font or font set */
 static const char *fonts[] = {
-	"Iosevka NerdFont Mono:size=13"
+	"Iosevka NerdFont Mono:size=13",
+	"Apple Color Emoji:size=13"
 };
 static const char *prompt      = NULL;      /* -p  option; prompt to the left of input field */
 static const char *colors[SchemeLast][2] = {
